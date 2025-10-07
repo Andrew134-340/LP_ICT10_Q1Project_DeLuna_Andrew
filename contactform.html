@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizza Whirl - Contact Us</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #f94144, #f3722c, #f9c74f, #90be6d);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .navbar {
+      background: linear-gradient(90deg, #d62828, #f77f00);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      border-radius: 0 0 14px 14px;
+    }
+    .navbar-brand {
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: #fff !important;
+      letter-spacing: 1px;
+    }
+    .navbar-brand i { color: #f9c74f; }
+    .nav-link {
+      color: #fff !important;
+      font-weight: 600;
+      transition: color .25s ease, transform .25s ease;
+    }
+    .nav-link:hover { color: #ffe066 !important; transform: scale(1.05); }
+    .container {
+      background: rgba(255, 250, 245, 0.98);
+      border-radius: 20px;
+      padding: 40px;
+      margin: 40px auto;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      max-width: 800px;
+    }
+    h2 {
+      color: #d62828;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .form-control {
+      border-radius: 10px;
+      border: 2px solid #d62828;
+      transition: all 0.2s ease;
+    }
+    .form-control:focus {
+      border-color: #f77f00;
+      box-shadow: 0 0 8px rgba(247, 127, 0, 0.4);
+    }
+    .btn-submit {
+      background: linear-gradient(45deg, #d62828, #f77f00);
+      border: none;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: all 0.25s ease;
+      display: block;
+      margin: 0 auto;
+    }
+    .btn-submit:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 25px rgba(247, 127, 0, 0.5);
+    }
+    #messageOutput {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: 600;
+      color: #28a745;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand" href="index.html"><i class="fas fa-pizza-slice me-2"></i>Pizza Whirl</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="ordering_form.html">Order Now</a></li>
+          <li class="nav-item"><a class="nav-link active" href="contactform.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+ <!--Form-->
+  <div class="container">
+    <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+
+    <form id="contactForm">
+      <div class="mb-3">
+        <label for="contactName" class="form-label">Your Name</label>
+        <input type="text" id="contactName" class="form-control" placeholder="Enter your full name">
+      </div>
+      <div class="mb-3">
+        <label for="contactEmail" class="form-label">Email Address</label>
+        <input type="email" id="contactEmail" class="form-control" placeholder="Enter your email address">
+      </div>
+      <div class="mb-3">
+        <label for="contactMessage" class="form-label">Message</label>
+        <textarea id="contactMessage" class="form-control" rows="4" placeholder="Write your message here..."></textarea>
+      </div>
+
+      <button id="submitBtn" class="btn btn-submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+    </form>
+
+    <div id="messageOutput" class="alert alert-success mt-3"></div>
+  </div>
+
+  <script type="py" src="contactform.py"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

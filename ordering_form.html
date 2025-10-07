@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizza Whirl - Food Ordering System</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+  <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
+  <style>
+    .navbar {
+      background: linear-gradient(90deg, #d62828, #f77f00);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      border-radius: 0 0 14px 14px;
+    }
+    .navbar-brand {
+      font-weight: 900;
+      font-size: 1.5rem; 
+      text-transform: uppercase;
+      color: #fff !important;
+      letter-spacing: 1px;
+    }
+    .navbar-brand i { color: #f9c74f; }
+    .nav-link {
+      color: #fff !important;
+      font-weight: 600;
+      transition: color .25s ease, transform .25s ease;
+    }
+    .nav-link:hover { color: #ffe066 !important; transform: scale(1.05); }
+    .nav-link.active { color: #ffe066 !important; text-decoration: underline; }
+
+    body {
+      background: linear-gradient(135deg, #f94144, #f3722c, #f9c74f, #90be6d);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background: rgba(255, 250, 245, 0.98);
+      border-radius: 20px;
+      padding: 30px;
+      margin: 30px auto;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      max-width: 1100px;
+    }
+
+    h2 { color: #d62828; font-weight: 800; }
+    h3 { color: #d62828; font-weight: 700; }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #fffaf5;
+      border-radius: 15px;
+      padding: 15px;
+      margin: 10px 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .menu-item:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+    }
+
+    .menu-item img {
+      border-radius: 10px;
+      margin-right: 15px;
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border: 2px solid rgba(214,40,40,0.12);
+    }
+
+    .menu-item .price {
+      color: #d62828;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .quantity-input {
+      width: 80px;
+      text-align: center;
+      border-radius: 10px;
+      border: 2px solid #d62828;
+      padding: 6px 8px;
+    }
+
+    .order-summary {
+      background-color: #fffaf5;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .btn-order {
+      background: linear-gradient(45deg, #d62828, #f77f00);
+      border: none;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .btn-order:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.14);
+    }
+
+    .total {
+      font-size: 1.2rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #d62828, #f77f00);
+      color: white;
+      border-radius: 28px;
+      padding: 10px 18px;
+      display: inline-block;
+      margin-top: 12px;
+    }
+
+    .form-control { border-radius: 10px; }
+
+    @media (max-width: 767px) {
+      .menu-item { flex-direction: row; gap: 10px; }
+      .quantity-input { width: 64px; }
+      .container { margin: 18px; padding: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand" href="index.html"><i class="fas fa-pizza-slice me-2"></i>Pizza Whirl</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="orderingform.html">Order Now</a></li>
+          <li class="nav-item"><a class="nav-link" href="contactform.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2 class="text-center mb-4"><i class="fas fa-pizza-slice"></i> Food Ordering System</h2>
+
+    <div class="row">
+      <!-- Menu Section -->
+      <div class="col-md-6">
+        <h3><i class="fas fa-utensils"></i> Menu:</h3>
+
+        <!-- Menu Items -->
+        <div class="menu-item">
+          <div class="d-flex align-items-center">
+            <img src="https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_1280.jpg" alt="Pepperoni Pizza">
+            <div><h5>Pepperoni Pizza</h5><p class="price">₱750.00</p></div>
+          </div>
+          <input type="number" class="quantity-input" min="0" value="0" data-name="Pepperoni Pizza" data-price="750">
+        </div>
+
+        <div class="menu-item">
+          <div class="d-flex align-items-center">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD4JHrTdXGtuiDcGBvIGRKfrgoVE0QeP3yOw&s" alt="Caesar Salad">
+            <div><h5>Caesar Salad</h5><p class="price">₱200.00</p></div>
+          </div>
+          <input type="number" class="quantity-input" min="0" value="0" data-name="Caesar Salad" data-price="200">
+        </div>
+
+        <div class="menu-item">
+          <div class="d-flex align-items-center">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgIUVwti1uXzFJfKATtSzNIS_7QSJS2YqSrQ&s" alt="Garlic Bread">
+            <div><h5>Garlic Bread</h5><p class="price">₱120.00</p></div>
+          </div>
+          <input type="number" class="quantity-input" min="0" value="0" data-name="Garlic Bread" data-price="120">
+        </div>
+
+        <div class="menu-item">
+          <div class="d-flex align-items-center">
+            <img src="https://images.themodernproper.com/production/posts/IcedTea_8.jpg?w=960&h=960&q=82&fm=jpg&fit=crop&dm=1716306653&s=e7e37b87126eaafc95ddb53435ba341e" alt="Iced Tea">
+            <div><h5>Iced Tea</h5><p class="price">₱50.00</p></div>
+          </div>
+          <input type="number" class="quantity-input" min="0" value="0" data-name="Iced Tea" data-price="50">
+        </div>
+
+        <div class="menu-item">
+          <div class="d-flex align-items-center">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkaeTUy5qY6Rt4caJWsBorZZJBXUBavaFm7w&s" alt="Soda Can">
+            <div><h5>Soda Can</h5><p class="price">₱50.00</p></div>
+          </div>
+          <input type="number" class="quantity-input" min="0" value="0" data-name="Soda Can" data-price="50">
+        </div>
+      </div>
+
+      <!-- Customer Details -->
+      <div class="col-md-6">
+        <h3><i class="fas fa-user"></i> Customer Details:</h3>
+        <div class="mb-3">
+          <label for="custName" class="form-label">Customer Name</label>
+          <input type="text" id="custName" class="form-control" placeholder="Enter your name">
+        </div>
+        <div class="mb-3">
+          <label for="custAddress" class="form-label">Address</label>
+          <input type="text" id="custAddress" class="form-control" placeholder="Enter your address">
+        </div>
+        <div class="mb-3">
+          <label for="custNumber" class="form-label">Contact Number</label>
+          <input type="text" id="custNumber" class="form-control" placeholder="Enter your contact number">
+        </div>
+
+        <button id="orderBtn" class="btn btn-order w-100 mt-3">Place Order</button>
+      </div>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="order-summary mt-4">
+      <h3><i class="fas fa-list"></i> Order Summary:</h3>
+      <ul id="orderList" class="list-unstyled mt-3"></ul>
+      <div id="totalDisplay" class="total">Total: ₱0.00</div>
+    </div>
+  </div>
+
+  <script type="py" src="main2.py"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
